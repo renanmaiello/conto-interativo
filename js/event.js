@@ -1,6 +1,6 @@
 var jogador = {
-                apelido: ''
-              }
+  apelido: ''
+}
 
 var valorIteracaoExibicaoTexto = 0;
 var intervaloExibicaoTexto;
@@ -9,6 +9,7 @@ var elementoHTML_Texto;
 var elementoHTML_ListaDeAcoes;
 var roteiroSelecionado;
 var idCenaSelecionada = 1;
+var listaDeAcoes = [];
 
 function carregar() {
   roteiroSelecionado = roteiro;
@@ -19,20 +20,21 @@ function carregar() {
 
 function exibeHistoria() {
   limparCenaAnterior();
-  selecionaTextoParaExibir();  
-  intervaloExibicaoTexto = setInterval(exibeTextoPorCaracter, 33);  
+  selecionaTextoParaExibir();
+  intervaloExibicaoTexto = setInterval(exibeTextoPorCaracter, 4);
 }
 
 function exibeTextoPorCaracter() {
   elementoHTML_Texto.innerHTML += textoParaExibir.split('')[valorIteracaoExibicaoTexto];
   valorIteracaoExibicaoTexto++;
   if (valorIteracaoExibicaoTexto === textoParaExibir.length) {
-    paraExibicao();
+      paraExibicao();
   }
 }
 
 function paraExibicao() {
   clearInterval(intervaloExibicaoTexto);
+  exibeAcoes();
 }
 
 function proximaCena(proximaCena) {
@@ -45,31 +47,37 @@ function limparCenaAnterior() {
   textoParaExibir = '';
   elementoHTML_ListaDeAcoes.innerHTML = '';
   elementoHTML_Texto.innerHTML = '';
+  listaDeAcoes.length = 0;
 }
 
 function selecionaTextoParaExibir() {
   for (let i = 0; i < roteiroSelecionado.cenas.length; i++) {
-    if (roteiroSelecionado.cenas[i].cena.id === idCenaSelecionada) {
-      textoParaExibir = roteiroSelecionado.cenas[i].cena.texto;
-      listaAcoes(roteiroSelecionado.cenas[i].cena.acoes);
-    }
+      if (roteiroSelecionado.cenas[i].cena.id === idCenaSelecionada) {
+          textoParaExibir = roteiroSelecionado.cenas[i].cena.texto;
+          listaAcoes(roteiroSelecionado.cenas[i].cena.acoes);
+      }
   }
 }
 
-function listaAcoes(acoes) {  
+function listaAcoes(acoes) {
   for (let i = 0; i < acoes.length; i++) {
-    var embalagemAcao = document.createElement("div");
-    var acao = document.createElement("button");
+      var embalagemAcao = document.createElement("div");
+      var acao = document.createElement("button");
 
-    embalagemAcao.classList.add('embalagem-acao');
-    acao.classList.add('acao');
-    acao.innerHTML = acoes[i].texto;
-    acao.onclick = function () {
-      proximaCena(acoes[i].idProximaCena);
-    }
+      embalagemAcao.classList.add('embalagem-acao');
+      acao.classList.add('acao');
+      acao.innerHTML = acoes[i].texto;
+      acao.onclick = function() {
+          proximaCena(acoes[i].idProximaCena);
+      }
 
-    embalagemAcao.appendChild(acao);
-    elementoHTML_ListaDeAcoes.appendChild(embalagemAcao);
-  }  
+      embalagemAcao.appendChild(acao);
+      listaDeAcoes.push(embalagemAcao);
+  }
 }
 
+function exibeAcoes() {
+  for (let i = 0; i < listaDeAcoes.length; i++) {
+      elementoHTML_ListaDeAcoes.appendChild(listaDeAcoes[i]);
+  }
+}
