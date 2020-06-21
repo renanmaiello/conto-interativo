@@ -28,7 +28,7 @@ function exibeTextoPorCaracter() {
   elementoHTML_Texto.innerHTML += textoParaExibir.split('')[valorIteracaoExibicaoTexto];
   valorIteracaoExibicaoTexto++;
   if (valorIteracaoExibicaoTexto === textoParaExibir.length) {
-      paraExibicao();
+    paraExibicao();
   }
 }
 
@@ -52,32 +52,30 @@ function limparCenaAnterior() {
 
 function selecionaTextoParaExibir() {
   for (let i = 0; i < roteiroSelecionado.cenas.length; i++) {
-      if (roteiroSelecionado.cenas[i].cena.id === idCenaSelecionada) {
-          textoParaExibir = roteiroSelecionado.cenas[i].cena.texto;
-          listaAcoes(roteiroSelecionado.cenas[i].cena.acoes);
-      }
+    if (roteiroSelecionado.cenas[i].cena.id === idCenaSelecionada) {
+      textoParaExibir = roteiroSelecionado.cenas[i].cena.texto;
+      listaAcoes(roteiroSelecionado.cenas[i].cena.acoes);
+    }
   }
 }
 
 function listaAcoes(acoes) {
   for (let i = 0; i < acoes.length; i++) {
-      var embalagemAcao = document.createElement("div");
-      var acao = document.createElement("button");
-
-      embalagemAcao.classList.add('embalagem-acao');
-      acao.classList.add('acao');
-      acao.innerHTML = acoes[i].texto;
-      acao.onclick = function() {
-          proximaCena(acoes[i].idProximaCena);
-      }
-
-      embalagemAcao.appendChild(acao);
-      listaDeAcoes.push(embalagemAcao);
+    var embalagemAcao = document.createElement("div");
+    var acao = document.createElement("button");
+    embalagemAcao.classList.add('embalagem-acao');
+    acao.classList.add('acao');
+    acao.innerHTML = acoes[i].texto;
+    acao.onclick = function() {
+      proximaCena(acoes[i].idProximaCena);
+    }
+    embalagemAcao.appendChild(acao);
+    listaDeAcoes.push(embalagemAcao);
   }
 }
 
 function exibeAcoes() {
   for (let i = 0; i < listaDeAcoes.length; i++) {
-      elementoHTML_ListaDeAcoes.appendChild(listaDeAcoes[i]);
+    elementoHTML_ListaDeAcoes.appendChild(listaDeAcoes[i]);
   }
 }
