@@ -1,0 +1,160 @@
+.main-container {
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.start-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .btn-start {
+    cursor: pointer;
+    padding: 20px;
+    margin-top: 50px;
+    color: #0cf;
+    // color: #00FF00;
+    font-family: "Fixedsys", monospace;
+    text-decoration: none;
+    text-shadow: 1px 1px 2px #0cf;
+    animation: blinker .7s linear infinite;
+    // text-shadow: 1px 1px 2px #00FF00;
+
+    @keyframes blinker {  
+      50% { opacity: 0; }
+    }
+  }
+}
+
+// BACKGROUND-STAR
+$stars: 150;         // Number of start per layer
+$depth: 250;         // Depth between star layers
+$speed: 3s;          // Number of seconds to transition between layers
+$width: 3000;        // Width of the starfield
+$height: 960;        // Height of the starfield
+
+html, body {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+body {
+  background: #000;
+  perspective: 340px;
+}
+.stars {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 2px;
+  $box-shadow: ();
+  @for $i from 0 through $stars {
+    $box-shadow: $box-shadow, (random($width)-$width/2 + px) (random($height)-$height/2 + px) hsl(90,0,75+random(25));
+  }
+  box-shadow: $box-shadow;
+  animation: fly $speed linear infinite;
+  transform-style: preserve-3d;
+  
+  &:before, &:after {
+    content: "";
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    box-shadow: inherit;
+  }
+  &:before {
+    transform: translateZ(-$depth + px);
+    animation: fade1 $speed linear infinite;
+  }
+  &:after {
+    transform: translateZ(-$depth * 2 + px);
+    animation: fade2 $speed linear infinite;
+  }
+}
+
+@keyframes fly {
+  from {
+    transform: translateZ(0px);
+  }
+  to {
+    transform: translateZ($depth + px);
+  }
+}
+
+@keyframes fade1 {
+  from {
+    opacity: .5;
+  }
+  to {
+    opacity: 1;
+  }  
+}
+@keyframes fade2 {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: .5;
+  }  
+}
+
+// FONT GLITCH
+@import url('https://fonts.googleapis.com/css2?family=Notable&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Allerta+Stencil&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
+
+.glitch{
+  color:white;
+  font-size:100px;
+  position:relative;
+  // width:400px;
+  margin:0 auto;
+  font-family: 'Notable', sans-serif;
+}
+@keyframes noise-anim{
+  $steps:20;
+  @for $i from 0 through $steps{
+    #{percentage($i*(1/$steps))}{
+      clip:rect(random(100)+px,9999px,random(100)+px,0);
+    }
+  }
+}
+.glitch:after{
+  content:attr(data-text);
+  position:absolute;
+  left:2px;
+  text-shadow:-1px 0 #ff00c1;
+  top:0;
+  color:white;
+  background:black;
+  overflow:hidden;
+  clip:rect(0,900px,0,0); 
+  animation:noise-anim 2s infinite linear alternate-reverse;
+}
+
+@keyframes noise-anim-2{
+  $steps:20;
+  @for $i from 0 through $steps{
+    #{percentage($i*(1/$steps))}{
+      clip:rect(random(100)+px,9999px,random(100)+px,0);
+    }
+  }
+}
+.glitch:before{
+  content:attr(data-text);
+  position:absolute;
+  left:-2px;
+  text-shadow:1px 0 blue; 
+  top:0;
+  color:white;
+  background:black;
+  overflow:hidden;
+  clip:rect(0,900px,0,0); 
+  animation:noise-anim-2 3s infinite linear alternate-reverse;
+}
