@@ -170,11 +170,14 @@ body {
     justify-content: center;
     align-items: center;
     position: fixed;
-    top: 0;
+    /*top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(31, 31, 31, 0.7);
+    background-color: rgba(31, 31, 31, 0.7);*/
+    background-color: white;
+    border: 1px solid;
+    padding: 20px;
 }
 
 .embalagem-rolagem-dado .interface-rolagem {
@@ -231,4 +234,26 @@ body {
 
 .red {
     color: red;
+}
+
+.embalagem-inimigos {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: fixed;
+    top: 100px;
+    width: 500px;
+    height: 200px;
+    background-color: grey;
+    border-radius: 4px;
+}
+
+.embalagem-inimigos .inimigo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    background-color: whitesmoke;
+    border-radius: 4px;
 }

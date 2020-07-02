@@ -9,6 +9,7 @@
 </head>
 
 <body onload="carregar()">
+
     <div class="embalagem-tela-jogo">
         <div class="embalagem-historia">
             <div class="texto-historia">
@@ -22,14 +23,28 @@
     <div class="embalagem-status-jogador">
         <div class="embalagem-atributo">
             <div class="descriacao">Nome:</div>
-            <div class="valor">Handsome</div>
+            <div class="valor">Handsome</div>            
         </div>
         <div class="embalagem-atributo">
             <div class="descriacao">Vida:</div>
             <div class="valor">100</div>
         </div>
     </div>
-    <div class="embalagem-rolagem-dado">
+
+    <div class="embalagem-inimigos" id="lista-de-inimigos">
+        <!--<div class="inimigo">
+            <label>Vida</label>
+            <label>Dano</label>
+            <button>Ataca</button>
+        </div>
+        <div class="inimigo">
+            <label>Vida</label>
+            <label>Dano</label>
+            <button>Ataca</button>
+        </div>-->
+    </div>
+
+    <div class="embalagem-rolagem-dado" id="tela-rolagem-dados">
         <div class="interface-rolagem">
             <div class="resultado">
                 <label id="resultado">6</label>
